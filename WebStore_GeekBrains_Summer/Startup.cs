@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -12,10 +13,16 @@ namespace WebStore_GeekBrains_Summer
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration; // интерфейс словаря
+        public Startup(IConfiguration config)
+        {
+            _configuration = config;
+        }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,14 +33,25 @@ namespace WebStore_GeekBrains_Summer
                 app.UseDeveloperExceptionPage();
             }
 
+            var get_str = _configuration["CustomeHelloWorld"];
+
+            //var get_str_loglevel_def = _configuration["Logging:LogLevel:Default"];
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                // endpoints.MapDefaultControllerRoute(); // краткий аналог
+                endpoints.MapControllerRoute(
+                    name:"default",
+                    pattern:"{controller=Home}/{action=Index}/{id?}");
+                /*
+                 * 
+                 */
+                //endpoints.MapGet("/", async context =>
+                //{
+                //    await context.Response.WriteAsync("Hello World!" + get_str);
+                //});
             });
         }
     }
