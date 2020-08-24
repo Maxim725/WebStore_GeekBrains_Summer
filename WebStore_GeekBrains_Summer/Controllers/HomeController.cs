@@ -43,5 +43,15 @@ namespace WebStore_GeekBrains_Summer.Controllers
         {
             return View(_empls);
         }
+
+        public IActionResult Details(int id)
+        {
+            var empl = _empls.First(i => i.Id == id) ?? null;
+
+            if (empl == null)
+                return NotFound();
+
+            return View(empl);
+        }
     }
 }
