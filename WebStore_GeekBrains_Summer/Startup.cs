@@ -33,6 +33,9 @@ namespace WebStore_GeekBrains_Summer
                 app.UseDeveloperExceptionPage();
             }
 
+            // ƒобавление статических элементов которые лежат в wwwroot, то есть, мы сможем к ним обращатьс€ через url запрос
+            app.UseStaticFiles();
+
             var get_str = _configuration["CustomeHelloWorld"];
 
             //var get_str_loglevel_def = _configuration["Logging:LogLevel:Default"];
