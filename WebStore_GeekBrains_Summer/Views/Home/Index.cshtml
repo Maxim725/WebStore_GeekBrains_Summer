@@ -1,4 +1,4 @@
-﻿@await Html.PartialAsync("_Slider") 
+﻿@await Html.PartialAsync("_Slider")
 <section>
     <div class="container">
         <div class="row">
@@ -696,3 +696,20 @@
         </div>
     </div>
 </section>
+@section Scripts 
+{
+    @*
+        Секции нужны, для того, чтобы для контента добавлять кастомные стили и скрипты для конкретной странички, а не для всего приложения
+
+        Для название секций используется IgnoreCase
+    *@
+    <script src="~/js/price-range.js"></script>
+
+}
+
+@section Styles 
+{
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+} 
