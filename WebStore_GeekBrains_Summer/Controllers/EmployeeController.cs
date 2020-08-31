@@ -8,7 +8,7 @@ using WebStore_GeekBrains_Summer.ViewModels;
 namespace WebStore_GeekBrains_Summer.Controllers
 {
     // прочитать о конвенции соглассованности в MVC
-    public class HomeController : Controller
+    public class EmployeeController : Controller
     {
         private readonly List<EmployeeVM> _empls = new List<EmployeeVM>()
         {
