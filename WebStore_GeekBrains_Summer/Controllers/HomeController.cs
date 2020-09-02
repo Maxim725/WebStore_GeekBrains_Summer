@@ -6,11 +6,14 @@ using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebStore_GeekBrains_Summer.Infrastructure.ActionFilters;
 
 namespace WebStore_GeekBrains_Summer.Controllers
 {
+    //[SimpleActionFilter]
     public class HomeController : Controller
     {
+        [SimpleActionFilter]
         public IActionResult Index()
         {
             return View();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebStore_GeekBrains_Summer.Infrastructure.Interfaces;
 using WebStore_GeekBrains_Summer.ViewModels;
 
 namespace WebStore_GeekBrains_Summer.Controllers
@@ -17,24 +18,12 @@ namespace WebStore_GeekBrains_Summer.Controllers
     // прочитать о конвенции соглассованности в MVC
     public class EmployeeController : Controller
     {
-        private readonly List<EmployeeVM> _empls = new List<EmployeeVM>()
+        private readonly IEmployeeService _employeeService;
+        public EmployeeController(IEmployeeService employeeService)
         {
-            new EmployeeVM()
-            {
-                Id = 1,
-                FirstName = "a"
-            },
-            new EmployeeVM()
-            {
-                Id = 2,
-                FirstName = "a"
-            },
-            new EmployeeVM()
-            {
-                Id = 3,
-                FirstName = "a"
-            }
-        };
+            // Внедрение зависимостей
+            _employeeService = employeeService;
+        }
 
         [Route("index")]
         public IActionResult Index()
@@ -48,20 +37,22 @@ namespace WebStore_GeekBrains_Summer.Controllers
             return View("Hello from index 2");
         }
         [Route("list")]
-        public IActionResult Emplyees()
+        public IActionResult Employees()
         {
-            return View(_empls);
+            return View(_employeeService.GetAll());
         }
 
         [Route("{id}")]
         public IActionResult Details(int id)
         {
-            var empl = _empls.First(i => i.Id == id) ?? null;
-
+            // Получаем сотрудника по id
+            var empl = _employeeService.GetById(id);
+            
+            // Если такого не существует
             if (empl == null)
-                return NotFound();
+                return NotFound(); // 404
 
-            return View(empl);
+            return View(_employeeService.GetById(id));
         }
     }
 }

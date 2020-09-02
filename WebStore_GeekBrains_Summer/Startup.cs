@@ -8,7 +8,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebStore_GeekBrains_Summer.Infrastructure.ActionFilters;
+using WebStore_GeekBrains_Summer.Infrastructure.Interfaces;
 using WebStore_GeekBrains_Summer.Infrastructure.Middleware;
+using WebStore_GeekBrains_Summer.Infrastructure.Services;
 
 namespace WebStore_GeekBrains_Summer
 {
@@ -25,7 +28,17 @@ namespace WebStore_GeekBrains_Summer
         // Выполняется 1 раз и добавляет сервисы, которые нужны в приложении
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(options => 
+            {
+                //options.Filters.Add(typeof(SimpleActionFilter)); // подключаем по типу
+
+                // альтернатива
+                options.Filters.Add(new SimpleActionFilter()); // подключение по объекту
+            });
+
+            // Добавляем разрешение зависимости
+            // Каждый IEmployeeService будет заменяться на InMemoryEmployeeService
+            services.AddSingleton<IEmployeeService, InMemoryEmployeeService>(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
