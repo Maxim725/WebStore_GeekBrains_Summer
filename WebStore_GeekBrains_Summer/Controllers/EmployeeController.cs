@@ -7,6 +7,13 @@ using WebStore_GeekBrains_Summer.ViewModels;
 
 namespace WebStore_GeekBrains_Summer.Controllers
 {
+    // если ставим кастомный роут для контроллера, то для всех методов таже прописываем, но, если не прописан, 
+    //то всё-равно можно прописывать кастомный роуты для методов
+    [Route("users")]
+
+    // такая конструкция позволит оставить в url название методов по-умолчанию!
+    //[Route("users/[action]")] 
+
     // прочитать о конвенции соглассованности в MVC
     public class EmployeeController : Controller
     {
@@ -28,6 +35,8 @@ namespace WebStore_GeekBrains_Summer.Controllers
                 FirstName = "a"
             }
         };
+
+        [Route("index")]
         public IActionResult Index()
         {
             //return View("Hello from controller");
@@ -38,12 +47,13 @@ namespace WebStore_GeekBrains_Summer.Controllers
         {
             return View("Hello from index 2");
         }
-
+        [Route("list")]
         public IActionResult Emplyees()
         {
             return View(_empls);
         }
 
+        [Route("{id}")]
         public IActionResult Details(int id)
         {
             var empl = _empls.First(i => i.Id == id) ?? null;
