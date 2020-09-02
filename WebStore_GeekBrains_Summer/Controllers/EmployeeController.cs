@@ -95,5 +95,20 @@ namespace WebStore_GeekBrains_Summer.Controllers
             // редирект на список сотрудников
             return RedirectToAction(nameof(Employees));
         }
+
+        [HttpGet]
+        [Route("delete'{id}")]
+        public IActionResult Delete(int id)
+        {
+            if (id > 0)
+            {
+                var model = _employeeService.GetById(id);
+                if (model != null)
+                    _employeeService.Delete(id);
+
+            }
+
+            return RedirectToAction("Employees");
+        }
     }
 }

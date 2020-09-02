@@ -38,11 +38,12 @@ namespace WebStore_GeekBrains_Summer
 
             // Добавляем разрешение зависимости
             // Каждый IEmployeeService будет заменяться на InMemoryEmployeeService
-            services.AddSingleton<IEmployeeService, InMemoryEmployeeService>(); // Время жизни до F5
-            
+            services.AddSingleton<IEmployeeService, InMemoryEmployeeService>(); // Время жизни до F5 (НЕТ, ПОЧИТАТЬ)
+            services.AddSingleton<IStudentService, InMemoryStudentService>(); 
+
             // Альтернатива разрешения зависимоствей
             //services.AddScoped<IEmployeeService, InMemoryEmployeeService>(); // Время жизни в один запрос
-            
+
             // Вторая альтернатива
             //services.AddTransient<IEmployeeService, InMemoryEmployeeService>(); // Время жизни в одно обращение к сервису
 
@@ -65,8 +66,11 @@ namespace WebStore_GeekBrains_Summer
 
             // Добавление статических элементов которые лежат в wwwroot, то есть, мы сможем к ним обращаться через url запрос
             app.UseStaticFiles();
+            
             // Кастомный Middleware
             app.UseMiddleware<TokenMiddleware>();
+
+
             var get_str = _configuration["CustomeHelloWorld"];
 
             //var get_str_loglevel_def = _configuration["Logging:LogLevel:Default"];
