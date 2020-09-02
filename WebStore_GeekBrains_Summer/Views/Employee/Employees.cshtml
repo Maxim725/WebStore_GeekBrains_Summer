@@ -6,9 +6,8 @@
 
 <h1>Сотрудники</h1>
 
-<p>
-    <a asp-action="Create">Новый</a>
-</p>
+<a asp-action="Edit">Добавить></a>
+
 <table class="table">
     <thead>
         <tr>
@@ -32,6 +31,9 @@
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) 
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
             </td>
         </tr>
 }

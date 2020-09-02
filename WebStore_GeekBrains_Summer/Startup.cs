@@ -38,7 +38,15 @@ namespace WebStore_GeekBrains_Summer
 
             // Добавляем разрешение зависимости
             // Каждый IEmployeeService будет заменяться на InMemoryEmployeeService
-            services.AddSingleton<IEmployeeService, InMemoryEmployeeService>(); 
+            services.AddSingleton<IEmployeeService, InMemoryEmployeeService>(); // Время жизни до F5
+            
+            // Альтернатива разрешения зависимоствей
+            //services.AddScoped<IEmployeeService, InMemoryEmployeeService>(); // Время жизни в один запрос
+            
+            // Вторая альтернатива
+            //services.AddTransient<IEmployeeService, InMemoryEmployeeService>(); // Время жизни в одно обращение к сервису
+
+            // Они различаются временем жизни сервиса
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

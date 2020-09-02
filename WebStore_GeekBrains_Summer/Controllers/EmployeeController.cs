@@ -54,5 +54,46 @@ namespace WebStore_GeekBrains_Summer.Controllers
 
             return View(_employeeService.GetById(id));
         }
+
+        [HttpGet]
+        [Route("edit/{id?}")]
+        public IActionResult Edit(int? id)
+        {
+            if (!id.HasValue)
+                return View(new EmployeeVM());
+
+            var model = _employeeService.GetById(id.Value);
+
+            if (model == null)
+                return NotFound(); // 404
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("edit/{id?}")]
+        public IActionResult Edit(EmployeeVM model)
+        {
+            if(model.Id > 0) // если есть Id то редактируем модель
+            {
+                var dbItem = _employeeService.GetById(model.Id);
+
+                if (ReferenceEquals(dbItem, null))
+                    return NotFound();
+
+                dbItem.Id = model.Id;
+                dbItem.FirstName = model.FirstName;
+
+            }
+            else
+            {
+                _employeeService.AddNew(model);
+            }
+
+            _employeeService.Commit();
+
+            // редирект на список сотрудников
+            return RedirectToAction(nameof(Employees));
+        }
     }
 }
