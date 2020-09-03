@@ -97,7 +97,7 @@ namespace WebStore_GeekBrains_Summer.Controllers
         }
 
         [HttpGet]
-        [Route("delete'{id}")]
+        [Route("delete/{id}")]
         public IActionResult Delete(int id)
         {
             if (id > 0)
