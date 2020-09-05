@@ -74,6 +74,16 @@ namespace WebStore_GeekBrains_Summer.Controllers
         [Route("edit/{id?}")]
         public IActionResult Edit(EmployeeVM model)
         {
+            if(model.FirstName == "qq")
+            {
+                // Кастомная проверка на валидность, нужно ставить до проверки свойсва IsValid...
+                ModelState.AddModelError("FirstName", "Неправильное имя");
+            }
+            // Проверка на валидацию модели
+            // Если не валидна, то возвращаем модель
+            if (!ModelState.IsValid) // проверяет данные, которые подходят к атрибутам валидации
+                return View(model);
+
             if(model.Id > 0) // если есть Id то редактируем модель
             {
                 var dbItem = _employeeService.GetById(model.Id);
