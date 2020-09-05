@@ -26,7 +26,7 @@ namespace WebStore_GeekBrains_Summer.Infrastructure.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var Categories = GetCategories();
-            return View(Categories);
+            return View("Default", Categories);
         }
 
         private List<CategoryVM> GetCategories()

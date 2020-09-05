@@ -42,6 +42,7 @@ namespace WebStore_GeekBrains_Summer.Controllers
                 }).OrderBy(p => p.Order)
                   .ToList()
             };
+
             return View(model);
 
             // Можно вернуть строку

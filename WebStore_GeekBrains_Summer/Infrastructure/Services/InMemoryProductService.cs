@@ -423,7 +423,7 @@ namespace WebStore_GeekBrains_Summer.Infrastructure.Services
                 products = products
                     .Where(p => p.BrandId.HasValue && p.BrandId.Value.Equals(filter.BrandId))
                     .ToList();
-            return _products;
+            return products;
         }
     }
 }
