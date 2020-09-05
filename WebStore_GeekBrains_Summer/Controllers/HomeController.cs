@@ -51,16 +51,6 @@ namespace WebStore_GeekBrains_Summer.Controllers
             return View();
         }
 
-        public IActionResult Shop()
-        {
-            return View();
-        }
-
-        public IActionResult ProductDetails()
-        {
-            return View();
-        }
-
 
         public IActionResult Cart()
         {
