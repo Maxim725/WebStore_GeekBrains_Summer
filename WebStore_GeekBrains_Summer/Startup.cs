@@ -56,7 +56,10 @@ namespace WebStore_GeekBrains_Summer
             // Добавляем разрешение зависимости
             // Каждый IEmployeeService будет заменяться на InMemoryEmployeeService
             services.AddSingleton<IEmployeeService, InMemoryEmployeeService>();
-            services.AddSingleton<IStudentService, InMemoryStudentService>(); 
+            services.AddSingleton<IStudentService, InMemoryStudentService>();
+
+            //
+            services.AddSingleton<IProductService, InMemoryProductService>();
 
             // Альтернатива разрешения зависимоствей
             //services.AddScoped<IEmployeeService, InMemoryEmployeeService>(); // Время жизни в один запрос
