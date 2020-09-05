@@ -12,5 +12,7 @@ namespace WebStore_GeekBrains_Summer.Infrastructure.Interfaces
         IEnumerable<Category> GetCategories();
 
         IEnumerable<Brand> GetBrands();
+
+        IEnumerable<Product> GetProducts(ProductFilter filter);
     }
 }

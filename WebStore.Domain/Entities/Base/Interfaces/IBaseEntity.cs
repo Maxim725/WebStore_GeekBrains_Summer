@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WebStore.Domain.Entities.Base.Interfaces
 {
-    interface IBaseEntity
+    public interface IBaseEntity
     {
         public int Id { get; set; }
     }

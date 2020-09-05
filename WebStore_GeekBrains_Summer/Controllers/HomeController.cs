@@ -6,17 +6,43 @@ using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebStore.Domain.Entities;
 using WebStore_GeekBrains_Summer.Infrastructure.ActionFilters;
+using WebStore_GeekBrains_Summer.Infrastructure.Interfaces;
+using WebStore_GeekBrains_Summer.Models.ViewModels;
 
 namespace WebStore_GeekBrains_Summer.Controllers
 {
     //[SimpleActionFilter]
     public class HomeController : Controller
     {
+        IProductService _productService;
+
+        public HomeController(IProductService productService)
+        {
+            _productService = productService;
+        }
         [SimpleActionFilter]
         public IActionResult Index()
         {
-            return View();
+            var products = _productService.GetProducts(
+                new ProductFilter() { BrandId = null, CategoryId = null });
+
+            var model = new CatalogVM()
+            {
+                BrandId = null,
+                CategoryId = null,
+                Products = products.Select(p => new ProductVM()
+                {
+                    Id = p.Id,
+                    ImageUrl = p.ImageUrl,
+                    Name = p.Name,
+                    Order = p.Order,
+                    Price = p.Price
+                }).OrderBy(p => p.Order)
+                  .ToList()
+            };
+            return View(model);
 
             // Можно вернуть строку
             //return Content("Hellow world!");

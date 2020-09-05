@@ -58,7 +58,6 @@ namespace WebStore_GeekBrains_Summer
             services.AddSingleton<IEmployeeService, InMemoryEmployeeService>();
             services.AddSingleton<IStudentService, InMemoryStudentService>();
 
-            //
             services.AddSingleton<IProductService, InMemoryProductService>();
 
             // Альтернатива разрешения зависимоствей
