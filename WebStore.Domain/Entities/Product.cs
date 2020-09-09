@@ -16,6 +16,7 @@ namespace WebStore.Domain.Entities
         public string ImageUrl { get; set; }
         public decimal Price { get; set; }
 
+        public string Manufacturer { get; set; }
         
         // Объявляем поле CategoryId внешним ключом
         [ForeignKey("CategoryId")]
