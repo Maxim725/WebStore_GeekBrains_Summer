@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebStore.DAL;
 using WebStore_GeekBrains_Summer.Infrastructure.ActionFilters;
 using WebStore_GeekBrains_Summer.Infrastructure.Interfaces;
 using WebStore_GeekBrains_Summer.Infrastructure.Middleware;
@@ -36,6 +38,8 @@ namespace WebStore_GeekBrains_Summer
                 options.Filters.Add(new SimpleActionFilter()); // подключение по объекту
             });
 
+            services.AddDbContext<WebStoreContext>(options => options
+                .UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
             /*
              *  Внедрение зависимостей позволяет разрабатывать слабосвязный код
              * 
