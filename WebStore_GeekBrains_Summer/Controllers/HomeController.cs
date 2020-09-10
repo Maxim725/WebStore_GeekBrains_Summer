@@ -26,25 +26,18 @@ namespace WebStore_GeekBrains_Summer.Controllers
         [SimpleActionFilter]
         public IActionResult Index()
         {
-            //var products = _productService.GetProducts(
-            //    new ProductFilter() { BrandId = null, CategoryId = null });
+            var products = _productService.GetProducts(
+                new ProductFilter() { BrandId = null, CategoryId = null });
 
-            //var model = new CatalogVM()
-            //{
-            //    BrandId = null,
-            //    CategoryId = null,
-            //    Products = products.Select(p => new ProductVM()
-            //    {
-            //        Id = p.Id,
-            //        ImageUrl = p.ImageUrl,
-            //        Name = p.Name,
-            //        Order = p.Order,
-            //        Price = p.Price
-            //    }).OrderBy(p => p.Order)
-            //      .ToList()
-            //};
-
-            return View(/*model*/);
+            var model = products.Select(p => new ProductVM()
+            {
+                Id = p.Id,
+                Name = p.Name,
+                ImageUrl = p.ImageUrl,
+                Order = p.Order,
+                Price = p.Price
+            });
+            return View(model);
 
             // Можно вернуть строку
             //return Content("Hellow world!");

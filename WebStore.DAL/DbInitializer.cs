@@ -18,7 +18,9 @@ namespace WebStore.DAL
                 return;
             }
 
-            var categories = new List<Category>()
+            if (!context.Categories.Any())
+            {
+                var categories = new List<Category>()
             {
                  new Category()
                 {
@@ -231,17 +233,18 @@ namespace WebStore.DAL
                     ParentId = null
                 }
             };
-            using (var trans = context.Database.BeginTransaction())
-            {
-                foreach (var category in categories)
+                using (var trans = context.Database.BeginTransaction())
                 {
-                    context.Categories.Add(category);
-                }
+                    foreach (var category in categories)
+                    {
+                        context.Categories.Add(category);
+                    }
 
-                context.Database.ExecuteSqlCommand("SET IDENTITY INSERT [dbo].[Categories] ON");
-                context.SaveChanges();
-                context.Database.ExecuteSqlCommand("SET IDENTITY INSERT [dbo].[Categories] OFF");
-                trans.Commit();
+                    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Categories] ON");
+                    context.SaveChanges();
+                    context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Categories] OFF");
+                    trans.Commit();
+                }
             }
 
             var brands = new List<Brand>()
@@ -296,9 +299,9 @@ namespace WebStore.DAL
                     context.Brands.Add(brand);
                 }
 
-                context.Database.ExecuteSqlCommand("SET IDENTITY INSERT [dbo].[Brands] ON");
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Brands] ON");
                 context.SaveChanges();
-                context.Database.ExecuteSqlCommand("SET IDENTITY INSERT [dbo].[Brands] OFF");
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Brands] OFF");
                 trans.Commit();
             }
             var products = new List<Product>() {
@@ -430,9 +433,9 @@ namespace WebStore.DAL
                     context.Products.Add(product);
                 }
 
-                context.Database.ExecuteSqlCommand("SET IDENTITY INSERT [dbo].[Products] ON");
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Products] ON");
                 context.SaveChanges();
-                context.Database.ExecuteSqlCommand("SET IDENTITY INSERT [dbo].[Products] OFF");
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Products] OFF");
                 trans.Commit();
             }
         }

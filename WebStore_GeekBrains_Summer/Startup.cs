@@ -62,7 +62,8 @@ namespace WebStore_GeekBrains_Summer
             services.AddSingleton<IEmployeeService, InMemoryEmployeeService>();
             services.AddSingleton<IStudentService, InMemoryStudentService>();
 
-            services.AddSingleton<IProductService, InMemoryProductService>();
+            // Сервис должен пересоздаваться каждый раз при обращении (при новом http запросе)
+            services.AddScoped<IProductService, SqlProductService>();
 
             // Альтернатива разрешения зависимоствей
             //services.AddScoped<IEmployeeService, InMemoryEmployeeService>(); // Время жизни в один запрос
