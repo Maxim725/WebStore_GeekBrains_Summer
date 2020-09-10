@@ -16,7 +16,7 @@ namespace WebStore.Domain.Entities
         public int? ParentId { get; set; }
         public int Order { get; set; }
 
-        // Связываем поле ParentId с ParentCategory смапим id с объектом
+        // Связываем поле ParentId с ParentCategory смапим id с объектом (может  и автоматически)
         [ForeignKey("ParentId")] 
         public virtual Category ParentCategory { get; set; }
         public virtual ICollection<Product> Products { get; set; }

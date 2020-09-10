@@ -9,7 +9,7 @@ namespace WebStore.DAL
 
     public class WebStoreContext : DbContext
     {
-        public WebStoreContext(DbContextOptions options) : base(options)
+        public WebStoreContext(DbContextOptions/*<WebStoreContext>*/ options) : base(options)
         {
         }
 

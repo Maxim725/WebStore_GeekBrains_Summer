@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -157,6 +158,19 @@ namespace WebStore_GeekBrains_Summer
                     await next.Invoke();
                 }
             });
+        }
+
+        
+        public class WebStoreContextFactory : IDesignTimeDbContextFactory<WebStoreContext>
+        {
+ 
+            public WebStoreContext CreateDbContext(string[] args)
+            {
+                var optionsBuilder = new DbContextOptionsBuilder<WebStoreContext>();
+                optionsBuilder.UseSqlServer("Server=DESKTOP-BA9BA6R\\SQLEXPRESS;Initial Catalog=WebStore;Trusted_Connection=true;Connection Timeout=30;");
+
+                return new WebStoreContext(optionsBuilder.Options);
+            }
         }
 
     }

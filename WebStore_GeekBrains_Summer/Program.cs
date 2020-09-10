@@ -20,7 +20,7 @@ namespace WebStore_GeekBrains_Summer
             var host = BuilderWebHost(args);
 
             // Рекомендация Microsoft так писать инициализацию бд
-            using(var scope = host.Services.CreateScope())
+            using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 try

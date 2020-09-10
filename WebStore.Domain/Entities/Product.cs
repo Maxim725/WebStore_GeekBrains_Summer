@@ -24,5 +24,8 @@ namespace WebStore.Domain.Entities
 
         [ForeignKey("BrandId")]
         public virtual Brand Brand { get; set; }
+
+        // Кастомное поле
+        public string Description { get; set; }
     }
 }
