@@ -115,7 +115,6 @@ namespace WebStore_GeekBrains_Summer.Infrastructure.Services
 
         public void Commit()
         {
-           
         }
 
         public void Delete(int id)

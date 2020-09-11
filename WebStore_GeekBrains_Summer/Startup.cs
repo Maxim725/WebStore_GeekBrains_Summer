@@ -1,16 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebStore.DAL;
+using WebStore.Domain;
 using WebStore_GeekBrains_Summer.Infrastructure.ActionFilters;
 using WebStore_GeekBrains_Summer.Infrastructure.Interfaces;
 using WebStore_GeekBrains_Summer.Infrastructure.Middleware;
@@ -41,6 +44,7 @@ namespace WebStore_GeekBrains_Summer
 
             services.AddDbContext<WebStoreContext>(options => options
                 .UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+
             /*
              *  Внедрение зависимостей позволяет разрабатывать слабосвязный код
              * 
@@ -73,6 +77,44 @@ namespace WebStore_GeekBrains_Summer
             //services.AddTransient<IEmployeeService, InMemoryEmployeeService>(); // Время жизни в одно обращение к сервису
 
             // Они различаются временем жизни сервиса
+
+            // Добавляем сервис индентификации Пользователь кастомный, а роль взяли стандартную из 3-х
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<WebStoreContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options => // необязательно
+            {
+                // Password settings
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 5;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+
+                // Lockout setup
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+
+            });
+
+            services.ConfigureApplicationCookie(options => // необязательно
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.Cookie.Expiration = TimeSpan.FromDays(150);
+                options.LoginPath = "Account/Login";
+                options.LoginPath = "Account/Logout";
+                options.LoginPath = "Account/AccessDenied";
+                options.SlidingExpiration = true;
+
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,10 +130,13 @@ namespace WebStore_GeekBrains_Summer
                 // Подключение модуля для конвейера, который подробно выводит ошибку
                 app.UseDeveloperExceptionPage();
             }
-
             // Добавление статических элементов которые лежат в wwwroot, то есть, мы сможем к ним обращаться через url запрос
             app.UseStaticFiles();
-            
+
+            // ВАЖНО: Ставить конвейер после UseStaticFiles, потому что, если пользователь не авторизуется, 
+            // то ему будет не доступны общие файлы стилей картинок и js-скриптов
+            app.UseAuthentication();
+
             // Кастомный Middleware
             app.UseMiddleware<TokenMiddleware>();
 
