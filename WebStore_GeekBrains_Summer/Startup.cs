@@ -107,10 +107,10 @@ namespace WebStore_GeekBrains_Summer
             {
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
-                options.Cookie.Expiration = TimeSpan.FromDays(150);
-                options.LoginPath = "Account/Login";
-                options.LoginPath = "Account/Logout";
-                options.LoginPath = "Account/AccessDenied";
+                //options.Cookie.Expiration = TimeSpan.FromDays(150);
+                options.LoginPath = "/Account/Login";
+                options.LoginPath = "/Account/Logout";
+                options.LoginPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
 
 
