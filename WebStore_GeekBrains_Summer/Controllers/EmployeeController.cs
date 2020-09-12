@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebStore_GeekBrains_Summer.Infrastructure.Interfaces;
 using WebStore_GeekBrains_Summer.ViewModels;
@@ -57,6 +58,7 @@ namespace WebStore_GeekBrains_Summer.Controllers
 
         [HttpGet]
         [Route("edit/{id?}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Edit(int? id)
         {
             if (!id.HasValue)
