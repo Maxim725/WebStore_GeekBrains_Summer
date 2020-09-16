@@ -1,0 +1,8 @@
+﻿@if (ViewBag.Price == 0)
+{
+    <a asp-controller="Cart" asp-action="Details"><i class="fa fa-shopping-cart"></i> Cart</a>
+}
+else
+{
+    <a asp-controller="Cart" asp-action="Details"><i class="fa fa-shopping-cart"></i> Cart(@ViewBag.Count)(@ViewBag.Price)</a>
+}

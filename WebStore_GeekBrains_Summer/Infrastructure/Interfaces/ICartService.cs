@@ -17,5 +17,7 @@ namespace WebStore_GeekBrains_Summer.Infrastructure.Interfaces
         void AddToCart(int id);
 
         CartVM TransformCart();
+
+        Cart Cart { get; set; }
     }
 }

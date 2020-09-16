@@ -144,7 +144,7 @@ namespace WebStore_GeekBrains_Summer
             app.UseAuthentication();
             app.UseAuthorization(); // Конвейер авторизации должен быть позже чем UseRouting
             // Кастомный Middleware
-            app.UseMiddleware<TokenMiddleware>();
+            //app.UseMiddleware<TokenMiddleware>();
 
 
             var get_str = _configuration["CustomeHelloWorld"];
@@ -154,10 +154,16 @@ namespace WebStore_GeekBrains_Summer
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                   name: "default",
+                   areaName: "Admin",
+                   pattern: "Admin/{controller=Product}/{action=Show}/{id?}");
+                
                 // endpoints.MapDefaultControllerRoute(); // краткий аналог
                 endpoints.MapControllerRoute(
                     name:"default",
                     pattern:"{controller=Home}/{action=Index}/{id?}");
+
                 /*
                  * 
                  */

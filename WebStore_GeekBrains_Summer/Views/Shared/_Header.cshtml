@@ -1,9 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-<header id="header">
+﻿<header id="header">
     <!--header-->
     <div class="header_top">
         <!--header_top-->
@@ -70,8 +65,9 @@
                             <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a asp-controller="Home" asp-action="Checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a asp-controller="Cart" asp-action="Details"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                            
+                            @*<li><a asp-controller="Cart" asp-action="Details"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            <li>@await Component.InvokeAsync("Cart")</li>*@
+                            <li><vc:cart></vc:cart></li>
                         </ul>
                     </div>
                 </div>
@@ -109,8 +105,8 @@
                                     <li><a asp-controller="Catalog" asp-action="Shop">Products</a></li>
                                     <li><a asp-controller="Catalog" asp-action="ProductDetails">Product Details</a></li>
                                     <li><a asp-controller="Home" asp-action="Checkout">Checkout</a></li>
-                                    <li><a asp-controller="Home" asp-action="Cart">Cart</a></li>
-                                    <li><a asp-controller="Home" asp-action="Login">Login</a></li>
+                                    <li><a asp-controller="Cart" asp-action="Details">Cart</a></li>
+                                    <li><a asp-controller="Account" asp-action="Login">Login</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

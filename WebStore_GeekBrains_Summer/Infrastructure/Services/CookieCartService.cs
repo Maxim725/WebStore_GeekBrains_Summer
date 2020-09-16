@@ -18,7 +18,7 @@ namespace WebStore_GeekBrains_Summer.Infrastructure.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly string _cartName;
 
-        private Cart Cart
+        public Cart Cart
         {
             get
             {
