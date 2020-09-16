@@ -133,10 +133,12 @@ namespace WebStore_GeekBrains_Summer
             // Добавление статических элементов которые лежат в wwwroot, то есть, мы сможем к ним обращаться через url запрос
             app.UseStaticFiles();
 
+            app.UseRouting();
+            
             // ВАЖНО: Ставить конвейер после UseStaticFiles, потому что, если пользователь не авторизуется, 
             // то ему будет не доступны общие файлы стилей картинок и js-скриптов
             app.UseAuthentication();
-
+            app.UseAuthorization(); // Конвейер авторизации должен быть позже чем UseRouting
             // Кастомный Middleware
             app.UseMiddleware<TokenMiddleware>();
 
@@ -145,7 +147,6 @@ namespace WebStore_GeekBrains_Summer
 
             //var get_str_loglevel_def = _configuration["Logging:LogLevel:Default"];
 
-            app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {

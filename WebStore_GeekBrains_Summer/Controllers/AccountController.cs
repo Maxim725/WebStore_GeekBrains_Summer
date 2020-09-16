@@ -74,6 +74,9 @@ namespace WebStore_GeekBrains_Summer.Controllers
                     return View(model); // потестить с выносом за цикл
                 }
             }
+
+            await _userManager.AddToRoleAsync(user, "Users"); // Хардкодное добавление роли, лучше вынести в константу или в перечисление
+
             await _signInManager.SignInAsync(user, false);
 
             return RedirectToAction("Index", "Home");

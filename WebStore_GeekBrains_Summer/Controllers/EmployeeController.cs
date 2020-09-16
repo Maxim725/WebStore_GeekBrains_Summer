@@ -17,6 +17,7 @@ namespace WebStore_GeekBrains_Summer.Controllers
     //[Route("users/[action]")] 
 
     // прочитать о конвенции соглассованности в MVC
+    [Authorize] // Чтобы получить данные с этого контроллера надо быть авторизованным
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;
@@ -38,12 +39,14 @@ namespace WebStore_GeekBrains_Summer.Controllers
             return View("Hello from index 2");
         }
         [Route("list")]
+        [AllowAnonymous] // Разрешаем анонимным пользователям доступ
         public IActionResult Employees()
         {
             return View(_employeeService.GetAll());
         }
 
         [Route("{id}")]
+        [Authorize(Roles = "Admins, Users")]
         public IActionResult Details(int id)
         {
             // Получаем сотрудника по id
@@ -58,7 +61,7 @@ namespace WebStore_GeekBrains_Summer.Controllers
 
         [HttpGet]
         [Route("edit/{id?}")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admins")]
         public IActionResult Edit(int? id)
         {
             if (!id.HasValue)
@@ -74,6 +77,7 @@ namespace WebStore_GeekBrains_Summer.Controllers
 
         [HttpPost]
         [Route("edit/{id?}")]
+        [Authorize(Roles = "Admins")]
         public IActionResult Edit(EmployeeVM model)
         {
             if(model.FirstName == "qq")
@@ -110,6 +114,7 @@ namespace WebStore_GeekBrains_Summer.Controllers
 
         [HttpGet]
         [Route("delete/{id}")]
+        [Authorize(Roles = "Admins")]
         public IActionResult Delete(int id)
         {
             if (id > 0)
