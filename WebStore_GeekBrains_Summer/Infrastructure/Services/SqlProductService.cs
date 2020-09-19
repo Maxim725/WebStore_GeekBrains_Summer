@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,10 +28,21 @@ namespace WebStore_GeekBrains_Summer.Infrastructure.Services
             return _context.Categories.ToList();
         }
 
+        public Product GetProductByid(int id)
+        {
+            return _context.Products
+                .Include(p => p.Category) // Жадная загрузка (Eager Load) для категорий
+                .Include(p => p.Brand) // Жадная загрузка (Eager Load) для брэндов
+                .FirstOrDefault(p => p.Id == id);
+        }
+
         public IEnumerable<Product> GetProducts(ProductFilter filter)
         {
             // Интерфейс IQueryable работает оптимально с бд, он не все данные вытаскивает, а тольк отфильтрованные
-            var query = _context.Products.AsQueryable();
+            var query = _context.Products
+                .Include(p => p.Category) // Жадная загрузка (Eager Load) для категорий
+                .Include(p => p.Brand) // Жадная загрузка (Eager Load) для брэндов
+                .AsQueryable();
             if (filter.BrandId.HasValue)
                 query = query.Where(p => p.BrandId.HasValue && p.BrandId.Value.Equals(filter.BrandId.Value));
             if (filter.CategoryId.HasValue)

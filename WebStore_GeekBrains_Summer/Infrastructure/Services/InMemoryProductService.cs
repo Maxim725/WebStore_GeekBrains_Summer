@@ -411,6 +411,11 @@ namespace WebStore_GeekBrains_Summer.Infrastructure.Services
             return _categories;
         }
 
+        public Product GetProductByid(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Product> GetProducts(ProductFilter filter)
         {
             var products = _products;

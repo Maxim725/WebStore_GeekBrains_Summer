@@ -10,8 +10,9 @@ using WebStore_GeekBrains_Summer.Models.ViewModels;
 
 namespace WebStore_GeekBrains_Summer.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admins")]
-    //[Area("Admin")]
+    //    [Authorize(Roles = "Admins")]
+    [Area("Admin")]
+    [Authorize(Roles ="Admins")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;

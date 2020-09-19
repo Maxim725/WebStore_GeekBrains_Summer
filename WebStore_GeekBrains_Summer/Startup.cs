@@ -154,19 +154,22 @@ namespace WebStore_GeekBrains_Summer
 
             app.UseEndpoints(endpoints =>
             {
+                // настройка конкретной области
                 endpoints.MapAreaControllerRoute(
                    name: "default",
                    areaName: "Admin",
                    pattern: "Admin/{controller=Product}/{action=Show}/{id?}");
                 
-                // endpoints.MapDefaultControllerRoute(); // краткий аналог
-                endpoints.MapControllerRoute(
-                    name:"default",
-                    pattern:"{controller=Home}/{action=Index}/{id?}");
+                // Настройка всех областей
+                //endpoints.MapControllerRoute(
+                //    name: "areas",
+                //    pattern: "{area:exist}/{controller=Product}/{action=Show}/{id?}");
 
-                /*
-                 * 
-                 */
+                //endpoints.MapDefaultControllerRoute(); // краткий аналог
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 //endpoints.MapGet("/", async context =>
                 //{
                 //    await context.Response.WriteAsync("Hello World!" + get_str);

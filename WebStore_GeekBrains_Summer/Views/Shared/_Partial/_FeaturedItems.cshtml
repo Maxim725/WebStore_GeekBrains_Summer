@@ -3,22 +3,24 @@
 <div class="features_items">
     <!--features_items-->
     <h2 class="title text-center">Товары</h2>
-    @foreach(var item in Model)
+    @foreach (var item in Model)
     {
 
         <div class="col-sm-4">
             <div class="product-image-wrapper">
                 <div class="single-products">
                     <div class="productinfo text-center">
-                        <img src="~/images/shop/@item.ImageUrl" alt="" />
-                        <h2>@item.Price.ToString("C")</h2>
-                        <p>@item.Name</p>
+                        <a asp-controller="Catalog" asp-action="ProductDetails" asp-route-id="@item.Id">
+                            <img src="~/images/shop/@item.ImageUrl" alt="" />
+                            <h2>@item.Price.ToString("C")</h2>
+                            <p>@item.Name</p>
+                        </a>
                         <a asp-controller="Cart" asp-action="AddToCart"
                            asp-route-id="@item.Id"
                            asp-route-returnUrl="@Context.Request.Path"
                            class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
-                    <div class="product-overlay">
+                    @*<div class="product-overlay">
                         <div class="overlay-content">
                             <h2>@item.Price.ToString("C")</h2>
                             <p>@item.Name</p>
@@ -27,7 +29,7 @@
                                asp-route-returnUrl="@Context.Request.Path"
                                class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
                 <div class="choose">
                     <ul class="nav nav-pills nav-justified">
@@ -38,5 +40,5 @@
             </div>
         </div>
     }
-    
+
 </div><!--features_items-->

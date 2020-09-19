@@ -14,5 +14,8 @@ namespace WebStore_GeekBrains_Summer.Infrastructure.Interfaces
         IEnumerable<Brand> GetBrands();
 
         IEnumerable<Product> GetProducts(ProductFilter filter);
+
+
+        Product GetProductByid(int id);
     }
 }
