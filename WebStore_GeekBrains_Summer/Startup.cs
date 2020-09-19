@@ -70,6 +70,9 @@ namespace WebStore_GeekBrains_Summer
             // Сервис должен пересоздаваться каждый раз при обращении (при новом http запросе)
             services.AddScoped<IProductService, SqlProductService>();
 
+            // Разрешение зависимости IOrderService
+            services.AddScoped<IOrderService, SqlOrderService>();
+
             // Альтернатива разрешения зависимоствей
             //services.AddScoped<IEmployeeService, InMemoryEmployeeService>(); // Время жизни в один запрос
 
