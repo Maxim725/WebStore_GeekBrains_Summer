@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore_GeekBrains_Summer", "WebStore_GeekBrains_Summer\WebStore_GeekBrains_Summer.csproj", "{433BF110-F6BD-4877-A8A8-227E8DE906EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore_GeekBrains_Summer", "WebStore_GeekBrains_Summer\WebStore_GeekBrains_Summer.csproj", "{433BF110-F6BD-4877-A8A8-227E8DE906EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Domain", "WebStore.Domain\WebStore.Domain.csproj", "{FCF3B84A-44CE-41D3-A48D-E93681D3C0E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.DAL", "WebStore.DAL\WebStore.DAL.csproj", "{30D3C924-1688-480B-B4E0-03589108961F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{433BF110-F6BD-4877-A8A8-227E8DE906EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{433BF110-F6BD-4877-A8A8-227E8DE906EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{433BF110-F6BD-4877-A8A8-227E8DE906EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCF3B84A-44CE-41D3-A48D-E93681D3C0E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCF3B84A-44CE-41D3-A48D-E93681D3C0E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCF3B84A-44CE-41D3-A48D-E93681D3C0E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCF3B84A-44CE-41D3-A48D-E93681D3C0E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30D3C924-1688-480B-B4E0-03589108961F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30D3C924-1688-480B-B4E0-03589108961F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30D3C924-1688-480B-B4E0-03589108961F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30D3C924-1688-480B-B4E0-03589108961F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

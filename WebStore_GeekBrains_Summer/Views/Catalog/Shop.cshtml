@@ -1,0 +1,20 @@
+﻿@model WebStore_GeekBrains_Summer.Models.ViewModels.CatalogVM
+
+@{ 
+    ViewData["Title"] = "Shop";
+}
+@await Html.PartialAsync("_Partial/_Advertisement") 
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                @await Html.PartialAsync("_Partial/_LeftSidebar") 
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                @await Html.PartialAsync("_Partial/_FeaturedItems", Model.Products)
+            </div>
+        </div>
+    </div>
+</section>

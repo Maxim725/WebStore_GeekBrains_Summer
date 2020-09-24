@@ -2,13 +2,14 @@
 
 @{
     ViewData["Title"] = "Emplyees";
+    bool isAdmin = User.IsInRole("Admins");
 }
 
 <h1>Сотрудники</h1>
 
-<p>
-    <a asp-action="Create">Новый</a>
-</p>
+@if (isAdmin) { 
+<a asp-action="Edit" class="btn btn-success">Добавить></a>
+}
 <table class="table">
     <thead>
         <tr>
@@ -31,10 +32,21 @@
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
             </td>
+            @if (isAdmin)
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                </td>
+
+            }
+            @if (isAdmin)
+            { 
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="btn btn-danger">X</i></a>
+                </td>
+            }
         </tr>
 }
     </tbody>

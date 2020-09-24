@@ -1,47 +1,103 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebStore_GeekBrains_Summer.ViewModels;
+using WebStore.Domain.Entities;
+using WebStore_GeekBrains_Summer.Infrastructure.ActionFilters;
+using WebStore_GeekBrains_Summer.Infrastructure.Interfaces;
+using WebStore_GeekBrains_Summer.Models.ViewModels;
 
 namespace WebStore_GeekBrains_Summer.Controllers
 {
-    // прочитать о конвенции соглассованности в MVC
+    //[SimpleActionFilter]
     public class HomeController : Controller
     {
-        private readonly List<EmployeeVM> _empls = new List<EmployeeVM>()
+        IProductService _productService;
+
+        public HomeController(IProductService productService)
         {
-            new EmployeeVM()
-            {
-                Id = 1,
-                FirstName = "a"
-            },
-            new EmployeeVM()
-            {
-                Id = 2,
-                FirstName = "a"
-            },
-            new EmployeeVM()
-            {
-                Id = 3,
-                FirstName = "a"
-            }
-        };
+            _productService = productService;
+        }
+
+        [SimpleActionFilter]
         public IActionResult Index()
         {
-            //return View("Hello from controller");
+            var products = _productService.GetProducts(
+                new ProductFilter() { BrandId = null, CategoryId = null });
+
+            var model = products.Select(p => new ProductVM()
+            {
+                Id = p.Id,
+                Name = p.Name,
+                ImageUrl = p.ImageUrl,
+                Order = p.Order,
+                Price = p.Price
+            });
+            return View(model);
+
+            // Можно вернуть строку
+            //return Content("Hellow world!");
+
+            // Можно пернуть пустой результат
+            //return new EmptyResult();
+
+            // Можно вернуть Файл
+            /*eturn FileContentResult(new byte[] { 1, 2, 3, 4 }, );*/
+
+            // Можно перенаправить куда-то
+            //return Redirect("http://google.com");
+            //return new RedirectResult("url");
+
+            // Можно перенаправить внутри вэб приложения
+            //return RedirectToAction("Shop", "Home");
+
+            // А также
+            //return new JsonResult("");
+            //return StatusCode(500);
+            //return NotFound();
+        }
+
+        public IActionResult Blog()
+        {
             return View();
         }
 
-        public IActionResult Index2()
+        //[Route("blog-single")]
+        public IActionResult BlogSingle() 
         {
-            return View("Hello from index 2");
+            return View();
         }
 
-        public IActionResult Emplyees()
+
+        public IActionResult Cart()
         {
-            return View(_empls);
+            return View();
         }
+
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        public new IActionResult NotFound()
+        {
+            return View();
+        }
+
+
     }
 }

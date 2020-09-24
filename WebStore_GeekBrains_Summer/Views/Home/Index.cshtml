@@ -1,13 +1,39 @@
-﻿
-@{
+﻿@model IEnumerable<WebStore_GeekBrains_Summer.Models.ViewModels.ProductVM>
+
+@await Html.PartialAsync("_Partial/_Slider")
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                @await Html.PartialAsync("_Partial/_LeftSidebar") 
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                @await Html.PartialAsync("_Partial/_FeaturedItems", Model)
+
+                @await Html.PartialAsync("_Partial/_CategoryTab")
+
+                @await Html.PartialAsync("_Partial/_RecommendedItems")
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts 
+{
+    @*
+        Секции нужны, для того, чтобы для контента добавлять кастомные стили и скрипты для конкретной странички, а не для всего приложения
+
+        Для название секций используется IgnoreCase
+    *@
+    <script src="~/js/price-range.js"></script>
+
 }
 
-<!DOCKTYPE html/>
-<html>
-    <head>
-
-    </head>
-    <body>
-        <h1>gg</h1>
-    </body>
-</html>
+@section Styles 
+{
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+} 

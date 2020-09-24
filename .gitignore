@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/WebStore_GeekBrains_Summer/wwwroot/css/site.min.css
+/WebStore_GeekBrains_Summer/wwwroot/js/site.min.js
+/WebStore_GeekBrains_Summer/wwwroot/js/site.min.js.map
